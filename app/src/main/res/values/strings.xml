@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EasyCodeClientServerApp</string>
+    <string name="no_connection_message">No internet connection</string>
+    <string name="service_unavailable_message">Service is unavailable</string>
+</resources>
