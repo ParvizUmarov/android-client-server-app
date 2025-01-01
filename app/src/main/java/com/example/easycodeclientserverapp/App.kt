@@ -1,6 +1,8 @@
 package com.example.easycodeclientserverapp
 
 import android.app.Application
+import com.example.easycodeclientserverapp.data.cache.CacheDataSource
+import com.example.easycodeclientserverapp.data.cloud.CloudDataSource
 import com.example.easycodeclientserverapp.view.ManageResources
 import com.example.easycodeclientserverapp.data.repository.BaseRepository
 import com.example.easycodeclientserverapp.data.cloud.JokeService
@@ -18,10 +20,15 @@ class App : Application() {
             .baseUrl("https://www.google.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+        val manageResources = ManageResources.Base(this)
+
         viewModel = ViewModel(
             BaseRepository(
-                retrofit.create(JokeService::class.java),
-                ManageResources.Base(this)
+                CloudDataSource.Base(
+                    retrofit.create(JokeService::class.java),
+                    manageResources),
+                CacheDataSource.Fake(manageResources),
             )
         )
     }

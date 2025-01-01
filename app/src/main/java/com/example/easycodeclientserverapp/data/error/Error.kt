@@ -20,4 +20,8 @@ interface Error {
 
     class ServiceUnavailable(manageResources: ManageResources) :
         Abstract(manageResources, R.string.service_unavailable_message)
+
+    class NoFavoriteJoke(manageResources: ManageResources) :
+            Abstract(manageResources, R.string.no_favorite_jokes)
+
 }

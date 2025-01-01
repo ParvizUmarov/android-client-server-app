@@ -2,10 +2,11 @@ package com.example.easycodeclientserverapp.data.dto
 
 import com.example.easycodeclientserverapp.data.cache.CacheDataSource
 import com.example.easycodeclientserverapp.data.entity.BaseJoke
-import com.example.easycodeclientserverapp.data.entity.Joke
+import com.example.easycodeclientserverapp.data.entity.FavoriteJoke
+import com.example.easycodeclientserverapp.data.entity.JokeUi
 import com.google.gson.annotations.SerializedName
 
-data class JokeDTO(
+data class JokeCloud(
     @SerializedName("id")
     private val id: Int,
     @SerializedName("type")
@@ -15,8 +16,9 @@ data class JokeDTO(
     @SerializedName("punchline")
     private val punchline: String
 ) {
-    fun toJoke() = BaseJoke(text, punchline)
+    fun toUi() = BaseJoke(text, punchline)
+    fun toFavoriteUi() : JokeUi = FavoriteJoke(text, punchline)
 
-    fun change(changeDataSource: CacheDataSource) : BaseJoke =
+    fun change(changeDataSource: CacheDataSource) : JokeUi =
         changeDataSource.addOrRemove(id, this)
 }

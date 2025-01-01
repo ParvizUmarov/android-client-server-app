@@ -1,8 +1,7 @@
 package com.example.easycodeclientserverapp.viewmodel
 
 import com.example.easycodeclientserverapp.data.callback.ResultCallback
-import com.example.easycodeclientserverapp.data.callback.DataCallback
-import com.example.easycodeclientserverapp.data.entity.Joke
+import com.example.easycodeclientserverapp.data.callback.JokeUiCallback
 import com.example.easycodeclientserverapp.data.error.Error
 import com.example.easycodeclientserverapp.data.repository.Repository
 import com.example.easycodeclientserverapp.view.ViewModel
@@ -17,7 +16,7 @@ class ViewModelTest {
         val model = FakeModel()
         model.returnSuccess = true
         val viewModel = ViewModel(model)
-        viewModel.init(object : DataCallback {
+        viewModel.init(object : JokeUiCallback {
             override fun provideText(text: String) {
                 assertEquals("joke one" + "\n" + "punchline", text)
             }
@@ -35,7 +34,7 @@ class ViewModelTest {
         val model = FakeModel()
         model.returnSuccess = false
         val viewModel = ViewModel(model)
-        viewModel.init(object : DataCallback {
+        viewModel.init(object : JokeUiCallback {
             override fun provideText(text: String) {
                 assertEquals("fake error message", text)
             }

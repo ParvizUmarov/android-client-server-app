@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.easycodeclientserverapp.App
-import com.example.easycodeclientserverapp.data.callback.DataCallback
+import com.example.easycodeclientserverapp.data.callback.JokeUiCallback
 import com.example.easycodeclientserverapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,10 +20,14 @@ class MainActivity : AppCompatActivity() {
         val button = binding.button
         val textView = binding.textView
         val progressBar = binding.progressBar
-        val checkBox = binding.checkbox
-        val iconView = binding.favoriteButton
+        val favoriteCheckbox = binding.favoriteCheckbox
+        val favoriteButton = binding.favoriteButton
 
-        checkBox.setOnCheckedChangeListener { _, isChecked ->
+        favoriteCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.chooseFavorite(isChecked)
+        }
+
+        favoriteButton.setOnClickListener {
             viewModel.changeJokeStatus()
         }
 
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.getJoke()
         }
 
-        viewModel.init(object: DataCallback {
+        viewModel.init(object: JokeUiCallback {
 
             override fun provideText(text: String) = runOnUiThread() {
                 button.isEnabled = true
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 textView.text = text
             }
 
-            override fun provideIconRes(id: Int) = iconView.setImageResource(id)
+            override fun provideIconRes(id: Int) = favoriteButton.setImageResource(id)
         })
     }
 
