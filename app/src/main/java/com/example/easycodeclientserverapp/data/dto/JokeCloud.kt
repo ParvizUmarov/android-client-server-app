@@ -1,6 +1,7 @@
 package com.example.easycodeclientserverapp.data.dto
 
 import com.example.easycodeclientserverapp.data.cache.CacheDataSource
+import com.example.easycodeclientserverapp.data.cache.JokeCache
 import com.example.easycodeclientserverapp.data.entity.BaseJoke
 import com.example.easycodeclientserverapp.data.entity.FavoriteJoke
 import com.example.easycodeclientserverapp.data.entity.JokeUi
@@ -21,4 +22,14 @@ data class JokeCloud(
 
     fun change(changeDataSource: CacheDataSource) : JokeUi =
         changeDataSource.addOrRemove(id, this)
+
+    fun toJokeRealm(): JokeCache {
+        return JokeCache().apply {
+            id = this@JokeCloud.id
+            text = this@JokeCloud.text
+            punchline = this@JokeCloud.punchline
+            type = this@JokeCloud.type
+
+        }
+    }
 }

@@ -11,6 +11,7 @@ activity = "1.8.0"
 constraintlayout = "2.2.0"
 gson = "2.11.0"
 retrofit = "2.11.0"
+realm = "1.16.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -24,9 +25,11 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 gson = {group = "com.google.code.gson", name = "gson", version.ref = "gson"}
 retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"}
 retrofit-converter = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
-
+realm-base = {group = "io.realm.kotlin", name = "library-base", version.ref = "realm"}
+realm-sync = {group = "io.realm.kotlin", name = "library-sync", version.ref = "realm"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+realmAndroid = {id = "io.realm.kotlin", version.ref = "realm"}
 
