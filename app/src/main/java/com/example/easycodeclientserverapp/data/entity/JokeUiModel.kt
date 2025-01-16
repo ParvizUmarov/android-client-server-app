@@ -4,15 +4,15 @@ import androidx.annotation.DrawableRes
 import com.example.easycodeclientserverapp.R
 import com.example.easycodeclientserverapp.data.callback.JokeUiCallback
 
-class BaseJoke(text: String, punchline: String) :
-    JokeUi(text, punchline,  R.drawable.ic_favorite_24px)
+class BaseModelJoke(text: String, punchline: String) :
+    JokeUiModel(text, punchline,  R.drawable.ic_favorite_24px)
 
-class FavoriteJoke(text: String, punchline: String) :
-    JokeUi(text, punchline, R.drawable.ic_favorite_filled_24px)
+class FavoriteModelJoke(text: String, punchline: String) :
+    JokeUiModel(text, punchline, R.drawable.ic_favorite_filled_24px)
 
-class FailedJoke(text: String) : JokeUi(text, "", 0)
+class FailedModelJoke(text: String) : JokeUiModel(text, "", 0)
 
-abstract class JokeUi(
+abstract class JokeUiModel(
     private val text: String,
     private val punchline: String,
     @DrawableRes

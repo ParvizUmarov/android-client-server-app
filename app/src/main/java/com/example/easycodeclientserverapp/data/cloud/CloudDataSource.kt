@@ -1,6 +1,6 @@
 package com.example.easycodeclientserverapp.data.cloud
 
-import com.example.easycodeclientserverapp.data.dto.JokeCloud
+import com.example.easycodeclientserverapp.data.dto.JokeServerModel
 import com.example.easycodeclientserverapp.view.ManageResources
 import retrofit2.Call
 import retrofit2.Response
@@ -23,14 +23,14 @@ interface CloudDataSource {
             com.example.easycodeclientserverapp.data.error.Error.ServiceUnavailable(manageResources)
 
         override fun fetch(cloudCallback: JokeCloudCallback) {
-            jokeService.getJoke().enqueue(object : retrofit2.Callback<JokeCloud> {
+            jokeService.getJoke().enqueue(object : retrofit2.Callback<JokeServerModel> {
 
-                override fun onResponse(call: Call<JokeCloud>, response: Response<JokeCloud>) {
+                override fun onResponse(call: Call<JokeServerModel>, response: Response<JokeServerModel>) {
 
                     if (response.isSuccessful) {
                         val body = response.body()
                         if (body != null)
-                            cloudCallback.provideJokeCloud(body)
+                            cloudCallback.provideJokeCloud(body.toJoke())
                          else
                             cloudCallback.provideError(serviceUnavailable)
                     } else {
@@ -38,7 +38,7 @@ interface CloudDataSource {
                     }
                 }
 
-                override fun onFailure(p0: Call<JokeCloud>, t: Throwable) {
+                override fun onFailure(p0: Call<JokeServerModel>, t: Throwable) {
                     cloudCallback.provideError(
                         if (t is UnknownHostException || t is ConnectException)
                             noConnection
@@ -53,7 +53,7 @@ interface CloudDataSource {
 
 interface JokeCloudCallback {
 
-    fun provideJokeCloud(jokeCloud: JokeCloud)
+    fun provideJokeCloud(joke: Joke)
 
     fun provideError(error: com.example.easycodeclientserverapp.data.error.Error)
 

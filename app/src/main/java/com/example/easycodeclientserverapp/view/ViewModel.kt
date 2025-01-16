@@ -2,8 +2,8 @@ package com.example.easycodeclientserverapp.view
 
 import com.example.easycodeclientserverapp.data.callback.ResultCallback
 import com.example.easycodeclientserverapp.data.callback.JokeUiCallback
-import com.example.easycodeclientserverapp.data.entity.FailedJoke
-import com.example.easycodeclientserverapp.data.entity.JokeUi
+import com.example.easycodeclientserverapp.data.entity.FailedModelJoke
+import com.example.easycodeclientserverapp.data.entity.JokeUiModel
 import com.example.easycodeclientserverapp.data.error.Error
 import com.example.easycodeclientserverapp.data.repository.Repository
 
@@ -12,12 +12,12 @@ class ViewModel(private val repository: Repository) {
     private var jokeUiCallback: JokeUiCallback = JokeUiCallback.Empty()
 
     private val resultCallback = object : ResultCallback {
-        override fun provideSuccess(jokeUi: JokeUi) {
-            jokeUi.map(jokeUiCallback)
+        override fun provideSuccess(jokeUiModel: JokeUiModel) {
+            jokeUiModel.map(jokeUiCallback)
         }
 
         override fun provideError(error: Error) {
-            FailedJoke(error.message()).map(jokeUiCallback)
+            FailedModelJoke(error.message()).map(jokeUiCallback)
         }
     }
 
